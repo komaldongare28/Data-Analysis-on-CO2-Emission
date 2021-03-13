@@ -7,3 +7,5 @@ Steps followed are:
 3. Create Projet folder "Data-Analysis-on-CO2-Emission" 
 4. Create a python file "Processdata.py"
 4.1 Read Emissisions.csv data throug dictionary.
+
+new Analysis.py created to analise.
