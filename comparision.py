@@ -1,11 +1,12 @@
 """
 Name: Python Data Analysis
-Purpose: Plotting emission graph for country
+Purpose: Plotting comparison graph for two countries
 
 Algorithm:
 
-Step 1: Take the input from user to visualize data
-Step 2: Getting the index of Country and passing it to plot function, Setting the Title and Label of Plot
+Step 1: Take two comma-separated countries input from user
+Step 2: Extracting the Index number for both countries
+Step 3: Passing the value to plot function and setting up label for country
 
 """
 
@@ -23,7 +24,7 @@ with open('Emissions.csv', 'r') as file:
 
 print("All data from Emissions.csv has been read into a dictionary.", end="\n\n")
 
-input_y = input("Select a year to find statistics (1997 to 2010): ")
+input_year = input("Select a year to find statistics (1997 to 2010): ")
 
 index_of = int()
 lines = []
@@ -54,22 +55,42 @@ print(f'In {input_year}, countries with minimum and maximum CO2 emission levels 
 print(f'Average CO2 emissions in {input_year} were {"%.6f" % round(average_emissions, 6)}')
 print()
 
-"""
-Step 1: Take the input from user to visualize data
-"""
+
 visualize_country = input("Select the country to visualize: ")
 
-"""
-Step 2: Getting the index of Country and passing it to plot function, Setting the Title and Label of Plot
-"""
-# From user entered value we extracted the Index value of country
 number = list(emission_dict.keys()).index(visualize_country)
-# Passed that index value to matplotlib plot function. As x value we passed years and as y value we passed emission value
 plt.plot(list(map(float, list(emission_dict.values())[0])),
          list(map(float, list(emission_dict.values())[number])))
-# Given the Title and Lable to Plot
 plt.title("Year vs Emissions in Capita")
 plt.xlabel("Year")
 plt.ylabel("Emissions in " + visualize_country.title())
+plt.show()
+print()
+
+"""
+Step 1: Take two comma-separated countries input from user
+"""
+country1, country2 = input("Write two comma-separated countries for which you want to visualize data: ").split(", ")
+
+"""
+Step 2: Extracting the Index number for both countries
+"""
+
+index_num_1 = list(emission_dict.keys()).index(country1)
+index_num_2 = list(emission_dict.keys()).index(country2)
+
+"""
+Step 3: Passing the value to plot function and setting up label for country
+"""
+
+# In this task we combined two plots in one and given the label to identify.
+plt.plot(list(map(float, list(emission_dict.values())[0])),
+         list(map(float, list(emission_dict.values())[index_num_1])), label=country1)
+plt.plot(list(map(float, list(emission_dict.values())[0])),
+         list(map(float, list(emission_dict.values())[index_num_2])), label=country2)
+plt.title("Year vs Emissions in Capita")
+plt.xlabel("Year")
+plt.ylabel("Emissions")
+plt.legend()
 plt.show()
 print()
